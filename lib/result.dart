@@ -3,8 +3,9 @@ import 'package:flutter/painting.dart';
 
 class Result extends StatelessWidget {
   final int score;
+  final void Function() resetQuiz;
 
-  Result(this.score);
+  Result({required this.score, required this.resetQuiz});
 
   String get resultPhrase {
     if (score >= 3 && score < 6) {
@@ -21,12 +22,33 @@ class Result extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(resultPhrase,
-          // ignore: prefer_const_constructors
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 30.0,
-          )),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            resultPhrase,
+            // ignore: prefer_const_constructors
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
+          Container(
+            color: Colors.blue,
+            child: TextButton(
+              onPressed: resetQuiz,
+              child: Text(
+                'Reset Quiz',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
